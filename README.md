@@ -49,5 +49,6 @@ The Notebook has been run with the following libraries:
 * Matplotlib
 * numpy
 * pandas
+* plotly
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
