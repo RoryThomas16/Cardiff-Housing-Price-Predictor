@@ -29,10 +29,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-TBD
+The project is practice for me, this is for me to practice more my regressors but also doesn't hurt to keep trying and practicing the same core concepts. I also want to try my hand at some neural networks and this seems a friendly project to broach this on.
 
 - The Web Scraping is basically sifting through historical house price data and putting this into a useable format.
-- 
+- The Machine Learning is basically taking the house price data (along with # of Bedrooms, # of Bathrooms, Property Type (e.g., terraced, semi-detached), and Date) and predicts what the house price will be in 'N' years.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
