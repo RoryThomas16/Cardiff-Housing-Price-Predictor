@@ -33,7 +33,7 @@ The project is practice for me, this is for me to practice more my regressors bu
 
 - The Web Scraping is basically sifting through historical house price data and putting this into a useable format.
 - The Machine Learning is basically taking the house price data (along with # of Bedrooms, # of Bathrooms, Property Type (e.g., terraced, semi-detached), and Date) and predicts what the house price will be in 'N' years.
-
+- A Streamlit UI is provided to allow the user to input the data and get a prediction, with an offline iteration using TKinter also available.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -64,6 +64,7 @@ The **Streamlit UI** has been run with the following libraries:
 * streamilt
 * numpy
 * pickle
+* pandas
 
 The **TKinter UI** has been run with the following libraries:
 * os
