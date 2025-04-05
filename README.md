@@ -59,9 +59,15 @@ The **Notebook** has been run with the following libraries:
 * Torchviz
 * pickle
 
-The **Streamlit** has been run with the following libraries:
+The **Streamlit UI** has been run with the following libraries:
 * os
 * streamilt
+* numpy
+* pickle
+
+The **TKinter UI** has been run with the following libraries:
+* os
+* tkinter
 * numpy
 * pickle
 
