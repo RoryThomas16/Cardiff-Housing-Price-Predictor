@@ -52,6 +52,7 @@ The Notebook has been run with the following libraries:
 * plotly
 * kaleido
 * sklearn
+* imblearn
 * pyTorch
 * Torchviz
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
