@@ -40,12 +40,14 @@ The project is practice for me, this is for me to practice more my regressors bu
 
 
 ### Built With
-The code is predominantly built in Python; primarily Jupyter Notebooks.
-The Notebook has been run with the following libraries:
-* Python [= 3.11.11]
+The code is predominantly built in Python [= 3.11.11]; primarily Jupyter Notebooks.
+
+**Dataset_Snapshot.py** has been written with the following libraries:
 * requests
 * BeautifulSoup
 * json
+
+The **Notebook** has been run with the following libraries:
 * Matplotlib
 * numpy
 * pandas
@@ -56,5 +58,12 @@ The Notebook has been run with the following libraries:
 * pyTorch
 * Torchviz
 * pickle
+
+The **Streamlit** has been run with the following libraries:
+* os
+* streamilt
+* numpy
+* pickle
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
