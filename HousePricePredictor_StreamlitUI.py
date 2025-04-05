@@ -4,6 +4,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import pickle
 import os
+import pandas as pd
 
 def list_files_in_directory(directory_path):
     try:
@@ -65,13 +66,25 @@ input_data = scaler.transform(input_data.reshape(1,-1))
 _, button_col, _ = st.columns(3) # Centre a button
 if button_col.button('Make Prediction'):
     # Make a prediction using the model
-
-    
+    predictions = {}
     for name, model in model.items():
         if name == 'ridge':
             temp_input_data = poly.transform(input_data.copy())
             prediction = model.predict(temp_input_data)
         else:
             prediction = model.predict(input_data)
-        print(f"{name}: Prediction = £{prediction[0]:.2f}")
-        st.write(f"{name}: Prediction = £{prediction[0]:.2f}")
+        predictions[name] = prediction[0]
+    
+    # Display the highest and lowest predictions
+    highest_model = max(predictions, key=predictions.get)
+    mean_prediction = np.mean(list(predictions.values()))
+    lowest_model = min(predictions, key=predictions.get)
+    
+    st.write(f"The highest predicted price is from the model '{highest_model}': £{predictions[highest_model]:.2f}")
+    st.write(f"The lowest predicted price is from the model '{lowest_model}': £{predictions[lowest_model]:.2f}")
+    st.write(f"The mean predicted price is: £{mean_prediction:.2f}")
+
+    # Convert the dictionary to a pandas DataFrame for plotting
+    predictions_df = pd.DataFrame(list(predictions.items()), columns=['Model', 'Predicted Price'])
+    # Plotting the bar chart
+    st.bar_chart(predictions_df.set_index('Model')['Predicted Price'])
