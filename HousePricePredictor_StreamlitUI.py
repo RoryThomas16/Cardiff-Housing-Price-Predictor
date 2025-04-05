@@ -64,7 +64,8 @@ input_data = scaler.transform(input_data.reshape(1,-1))
 
 # Button to trigger prediction
 _, button_col, _ = st.columns(3) # Centre a button
-if button_col.button('Make Prediction'):
+if input_feature_1 or input_feature_2 or input_feature_3 or input_feature_4:
+#if button_col.button('Make Prediction'):
     # Make a prediction using the model
     predictions = {}
     for name, model in model.items():
