@@ -55,5 +55,6 @@ The Notebook has been run with the following libraries:
 * imblearn
 * pyTorch
 * Torchviz
+* pickle
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
