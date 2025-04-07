@@ -72,7 +72,7 @@ class RightMoveScraper:
             new_df = pd.DataFrame(data)
             self.df = pd.concat([self.df, new_df])
             if idx % 20 == 0:
-                print(f"Scraped page {idx + 1:02}} of {len(self.urls)}")
+                print(f"Scraped page {idx + 1:02} of {len(self.urls)}")
 
     def clean_data(self):
         """Perform basic cleanup on the DataFrame."""
