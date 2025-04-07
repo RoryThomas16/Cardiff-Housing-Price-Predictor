@@ -5,8 +5,9 @@ import pandas as pd
 from datetime import datetime
 
 class RightMoveScraper:
-    def __init__(self, num_pages=10):
+    def __init__(self, num_pages=40, base_url="https://www.rightmove.co.uk/house-prices/cardiff-bay.html"):
         """Initialize the scraper with the number of pages to scrape."""
+        self.base_url = base_url + "?pageNumber="
         self.num_pages = num_pages
         self.urls = []
         self.df = pd.DataFrame()
@@ -14,7 +15,7 @@ class RightMoveScraper:
     def generate_urls(self):
         """Generate the list of URLs to scrape."""
         for idx in range(1, self.num_pages + 1):
-            url = f"https://www.rightmove.co.uk/house-prices/roath.html?pageNumber={idx}"
+            url = self.base_url + f"{idx}"
             self.urls.append(url)
 
     def scrape_data(self):
@@ -22,7 +23,12 @@ class RightMoveScraper:
         for url in self.urls:
             r = requests.get(url)
             soup = BeautifulSoup(r.text, 'html.parser')
-            content = json.loads(soup.find_all("script")[-4].text.split(" = ")[1].split(";")[0])
+            print(url)
+            for idx, chunk in enumerate(soup.find_all("script")):
+                if "window.PAGE_MODEL = " in chunk.text:
+                    script = chunk.text.split("window.PAGE_MODEL = ")[1].split(";")[0]
+                    break
+            content = json.loads(script)
             content.pop('isAuthenticated', None)
             content.pop('metadata', None)
             content = content['searchResult']['properties']
@@ -78,7 +84,7 @@ class RightMoveScraper:
 
 if __name__ == "__main__":
     # Create an instance of the scraper
-    scraper = RightMoveScraper(num_pages=5)  # Adjust the number of pages as needed
+    scraper = RightMoveScraper(num_pages=10)  # Adjust the number of pages as needed
 
     # Run the scraper
     scraper.run()
