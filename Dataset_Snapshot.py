@@ -10,29 +10,28 @@ class RightMoveScraper:
         """Initialize the scraper with the number of pages to scrape."""
         if type(base_url) is list:
             self.base_url = [url + "?pageNumber=" for url in base_url]
-        elif  type(base_url) is str:
-            self.base_url = base_url + "?pageNumber="
+        elif type(base_url) is str:
+            self.base_url = [base_url + "?pageNumber="]  # Convert single string to list for consistency
         else:
-            raise ValueError("Base URL must be a string or a list containing a single string.")
+            raise ValueError("Base URL must be a string or a list containing strings.")
         self.num_pages = num_pages
         self.urls = []
         self.df = pd.DataFrame()
 
+    def extract_region(self, url):
+        """Extract the region from the base URL."""
+        return url.split("/")[-1].split(".")[0]  # Extract the last part before the extension
+
     def generate_urls(self):
         """Generate the list of URLs to scrape."""
-        if type(self.base_url) is list:
-            for url in self.base_url:
-                for idx in range(1, self.num_pages + 1):
-                    url = url + f"{idx}"
-                    self.urls.append(url)
-        else:
+        for url in self.base_url:
+            region = self.extract_region(url)  # Extract region for each base URL
             for idx in range(1, self.num_pages + 1):
-                url = self.base_url + f"{idx}"
-                self.urls.append(url)
+                self.urls.append((f"{url}{idx}", region))  # Store URL and corresponding region as a tuple
 
     def scrape_data(self):
         """Scrape data from the generated URLs and store it in a DataFrame."""
-        for idx, url in enumerate(self.urls):
+        for idx, (url, region) in enumerate(self.urls):
             r = requests.get(url)
             soup = BeautifulSoup(r.text, 'html.parser')
             for chunk in soup.find_all("script"):
@@ -67,7 +66,8 @@ class RightMoveScraper:
                         'latitude': latitude,
                         'longitude': longitude,
                         'display_price': display_price,
-                        'date_sold': date_sold
+                        'date_sold': date_sold,
+                        'region': region  # Add the region to the data
                     })
             new_df = pd.DataFrame(data)
             self.df = pd.concat([self.df, new_df])
