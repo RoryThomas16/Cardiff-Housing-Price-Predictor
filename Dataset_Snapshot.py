@@ -3,28 +3,39 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd
 from datetime import datetime
+import argparse
 
 class RightMoveScraper:
     def __init__(self, num_pages=40, base_url="https://www.rightmove.co.uk/house-prices/cardiff-bay.html"):
         """Initialize the scraper with the number of pages to scrape."""
-        self.base_url = base_url + "?pageNumber="
+        if type(base_url) is list:
+            self.base_url = [url + "?pageNumber=" for url in base_url]
+        elif  type(base_url) is str:
+            self.base_url = base_url + "?pageNumber="
+        else:
+            raise ValueError("Base URL must be a string or a list containing a single string.")
         self.num_pages = num_pages
         self.urls = []
         self.df = pd.DataFrame()
 
     def generate_urls(self):
         """Generate the list of URLs to scrape."""
-        for idx in range(1, self.num_pages + 1):
-            url = self.base_url + f"{idx}"
-            self.urls.append(url)
+        if type(self.base_url) is list:
+            for url in self.base_url:
+                for idx in range(1, self.num_pages + 1):
+                    url = url + f"{idx}"
+                    self.urls.append(url)
+        else:
+            for idx in range(1, self.num_pages + 1):
+                url = self.base_url + f"{idx}"
+                self.urls.append(url)
 
     def scrape_data(self):
         """Scrape data from the generated URLs and store it in a DataFrame."""
-        for url in self.urls:
+        for idx, url in enumerate(self.urls):
             r = requests.get(url)
             soup = BeautifulSoup(r.text, 'html.parser')
-            print(url)
-            for idx, chunk in enumerate(soup.find_all("script")):
+            for chunk in soup.find_all("script"):
                 if "window.PAGE_MODEL = " in chunk.text:
                     script = chunk.text.split("window.PAGE_MODEL = ")[1].split(";")[0]
                     break
@@ -60,6 +71,8 @@ class RightMoveScraper:
                     })
             new_df = pd.DataFrame(data)
             self.df = pd.concat([self.df, new_df])
+            if idx % 20 == 0:
+                print(f"Scraped page {idx + 1:02}} of {len(self.urls)}")
 
     def clean_data(self):
         """Perform basic cleanup on the DataFrame."""
@@ -83,8 +96,20 @@ class RightMoveScraper:
         self.save_to_csv()
 
 if __name__ == "__main__":
+    
+    parser = argparse.ArgumentParser(description='Optional app description')
+    parser.add_argument('--num_pages', type=int, default=40, help='Number of pages to scrape')
+    parser.add_argument('--urls', type=str, default='txt', help='Base URL to scrape, or type "txt" to use a text file')
+    args = parser.parse_args()
+    base_url = []
+    if args.urls != 'txt':
+        base_url = args.urls
+    else:
+        for line in open('urls.txt'):
+            base_url.append(line.strip())
+    
     # Create an instance of the scraper
-    scraper = RightMoveScraper(num_pages=10)  # Adjust the number of pages as needed
+    scraper = RightMoveScraper(num_pages=args.num_pages, base_url=base_url)  # Adjust the number of pages as needed
 
     # Run the scraper
     scraper.run()
