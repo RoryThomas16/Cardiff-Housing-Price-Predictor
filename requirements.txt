@@ -1,0 +1,7 @@
+pandas
+plotly
+streamlit
+streamlit.components.v1
+pandas
+pickle
+numpy
