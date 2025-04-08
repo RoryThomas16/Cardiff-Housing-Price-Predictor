@@ -4,6 +4,7 @@ import json
 import pandas as pd
 from datetime import datetime
 import argparse
+import os
 
 class RightMoveScraper:
     def __init__(self, num_pages=40, base_url="https://www.rightmove.co.uk/house-prices/cardiff-bay.html"):
@@ -84,7 +85,9 @@ class RightMoveScraper:
     def save_to_csv(self):
         """Save the DataFrame to a CSV file with a timestamp in the file name."""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        output_file = f"rightmove_housing_data_{timestamp}.csv"
+        if not os.path.exists('.\\data'):
+            os.makedirs('.\\data')
+        output_file = f"data\\rightmove_housing_data_{timestamp}.csv"
         self.df.to_csv(output_file, index=False)
         print(f"DataFrame written to {output_file}")
 
