@@ -29,7 +29,7 @@ model_directory = '.\\models'
 for idx, file in enumerate(list_files_in_directory(model_directory)):
     #model.append(pickle.load(os.path.join(model_directory, file)))
     with open(os.path.join(model_directory,file), 'rb') as pickle_file:
-        content = pd.read_pickle.load(pickle_file)
+        content = pd.read_pickle(pickle_file)
         if 'propTypeEncoder' in file:
             propTypeEncoder = content
         elif 'scaler' in file:
