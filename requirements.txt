@@ -6,5 +6,6 @@ pandas
 pickle
 numpy
 scikit-learn==1.6.1
+sklearn
 scipy
 matplotlib
