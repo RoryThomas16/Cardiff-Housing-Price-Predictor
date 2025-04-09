@@ -5,5 +5,6 @@ matplotlib==3.4.1
 plotly==4.14.3
 pandas==1.2.3
 joblib==0.16.0
-scikit-learn
-pickle
+scikit-learn==1.6.1
+sklearn==0.24.2
+pickle==0.7.5
