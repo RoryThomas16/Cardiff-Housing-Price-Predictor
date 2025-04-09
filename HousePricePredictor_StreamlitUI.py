@@ -25,6 +25,7 @@ def list_files_in_directory(directory_path):
     
 model = {}
 model_directory = os.path.join(os.getcwd(), 'models')  
+img_directory = os.path.join(os.getcwd(), 'img')
 print(model_directory)
 for idx, file in enumerate(list_files_in_directory(model_directory)):
     #model.append(pickle.load(os.path.join(model_directory, file)))
@@ -44,7 +45,7 @@ for idx, file in enumerate(list_files_in_directory(model_directory)):
 st.title('Roath (Cardiff) House Price Predictor - by Rory Thomas')
 
 st.header("Data Set used in Training")
-HtmlFile = open("img\\mapped_dataset.html", 'r', encoding='utf-8')
+HtmlFile = open(os.path.join(img_directory,"mapped_dataset.html"), 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
 components.html(source_code, width=700, height=500, scrolling=False)
     
