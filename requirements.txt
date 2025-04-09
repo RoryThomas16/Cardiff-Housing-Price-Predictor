@@ -5,6 +5,6 @@ streamlit.components.v1
 pandas
 pickle
 numpy
-scikit-learn
+scikit-learn==1.6.1
 scipy
 matplotlib
