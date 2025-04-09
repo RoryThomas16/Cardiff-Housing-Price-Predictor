@@ -11,7 +11,8 @@ def list_files_in_directory(directory_path):
     try:
         # List all files in the directory
         files = os.listdir(directory_path)
-
+        print(os.getcwd())
+        print(files)
         # Filter to show only files (exclude directories)
         files = [f for f in files if os.path.isfile(os.path.join(directory_path, f))]
 
