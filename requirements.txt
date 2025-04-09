@@ -5,3 +5,6 @@ streamlit.components.v1
 pandas
 pickle
 numpy
+scikit-learn
+scipy
+matplotlib
