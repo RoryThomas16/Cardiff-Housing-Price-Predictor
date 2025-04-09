@@ -5,6 +5,7 @@ import streamlit.components.v1 as components
 import pickle
 import os
 import pandas as pd
+import sklearn
 
 def list_files_in_directory(directory_path):
     try:
