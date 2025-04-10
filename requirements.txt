@@ -2,3 +2,9 @@ streamlit
 pandas
 numpy
 plotly
+scikit-learn
+xgboost
+torch
+seaborn
+plotly
+imblearn
