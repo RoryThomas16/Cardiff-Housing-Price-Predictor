@@ -9,7 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # 
-plotly_map = "mapped_dataset.html"
+plotly_map = "mapped_dataset_with_slider.html"
 plotly_dataset = "rightmove_housing_data_20250408_003419.csv"
 # 
 
