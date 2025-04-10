@@ -16,6 +16,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
+      <a href="application">Application</a>
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
@@ -27,6 +28,15 @@
 
 
 <!-- ABOUT THE PROJECT -->
+## Application
+You can access the application here from the following link:
+
+https://rorythomas16-cardiff-hou-housepricepredictor-streamlitui-l5hul5.streamlit.app/
+
+The application has been developed in Streamlit as it is suited for handling data science projects in a great web-based UI. 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 ## About The Project
 
 The project is practice for me, this is for me to practice more my regressors but also doesn't hurt to keep trying and practicing the same core concepts. I also want to try my hand at some neural networks and this seems a friendly project to broach this on.
@@ -36,8 +46,6 @@ The project is practice for me, this is for me to practice more my regressors bu
 - A Streamlit UI is provided to allow the user to input the data and get a prediction, with an offline iteration using TKinter also available.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 The code is predominantly built in Python [= 3.11.11]; primarily Jupyter Notebooks.
@@ -66,6 +74,7 @@ The **Streamlit UI** has been run with the following libraries:
 * pickle
 * pandas
 
+**(DEPRCIATED)** - The TKinter UI has not been maintained and may not work on modern releases.
 The **TKinter UI** has been run with the following libraries:
 * os
 * tkinter

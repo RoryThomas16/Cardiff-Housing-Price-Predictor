@@ -9,8 +9,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # 
-plotly_map = "mapped_dataset_with_slider.html"
-plotly_dataset = "rightmove_housing_data_20250408_003419.csv"
+plotly_map_year = "mapped_dataset_with_slider.html"
+plotly_map_region = "mapped_dataset_with_region.html"
+plotly_dataset = "rightmove_housing_data_20250410_235533.csv"
 # 
 
 def list_files_in_directory(directory_path):
@@ -65,7 +66,11 @@ if os.path.exists(dataset_path):
     df['display_price'] = df['display_price'].apply(lambda x: float(x.replace('£', '').replace(',', '')) if isinstance(x, str) else x)
             
 with tab2:
-    st.header("Data Set used in Training")
+    st.header("Data Set used in Training - Sliced by Year")
+    HtmlFile = open(os.path.join(img_directory, plotly_map), 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    components.html(source_code, width=700, height=500, scrolling=False)
+    st.header("Data Set used in Training - Sliced by Region")
     HtmlFile = open(os.path.join(img_directory, plotly_map), 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     components.html(source_code, width=700, height=500, scrolling=False)
