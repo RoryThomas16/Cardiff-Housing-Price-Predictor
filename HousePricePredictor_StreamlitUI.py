@@ -1,51 +1,10 @@
 # imports
-# UI Imports
+import numpy as np
 import streamlit as st 
 import streamlit.components.v1 as components
-
-# File imports 
-import os
-
-# Data Imports
-# - Dataframe 
-import numpy as np
-import pandas as pd
-# - Visualisations
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.graph_objects as go
-import plotly.express as px
-# - Machine Learning
-# - - Classical 
-from sklearn.tree import plot_tree
-from sklearn.linear_model import LinearRegression, Ridge, Lasso, SGDRegressor
-from sklearn.metrics import r2_score, mean_squared_error
-from sklearn.preprocessing import LabelEncoder, StandardScaler, PolynomialFeatures
-from sklearn.model_selection import train_test_split, TimeSeriesSplit, GridSearchCV
-from sklearn.ensemble import RandomForestRegressor, VotingRegressor
-from sklearn.feature_selection import SelectKBest, f_regression
-from sklearn.svm import SVR
-from xgboost import XGBRegressor
-# - - Neural Networks
-import torch
-import torch.nn as nn
-import torch.optim as optim
-from torchviz import make_dot
-
-# - Stats
-import statsmodels.api as sm
-from statsmodels.tsa.arima.model import ARIMA
-import scipy.stats as stats 
-from statsmodels.tsa.holtwinters import ExponentialSmoothing
-# - Oversampling
-from imblearn.over_sampling import SMOTE, ADASYN, RandomOverSampler
-from imblearn.pipeline import Pipeline
-        
-# Personal Import
-from Dataset_Snapshot import RightMoveScraper
-
-# Save the Model Imports
 import pickle
+import os
+import pandas as pd
 
 def list_files_in_directory(directory_path):
     try:
@@ -66,7 +25,8 @@ def list_files_in_directory(directory_path):
     
 model = {}
 model_directory = os.path.join(os.getcwd(), 'models')  
-img_directory = os.path.join(os.getcwd(), 'img')
+"""img_directory = os.path.join(os.getcwd(), 'img')
+print(model_directory)"""
 for idx, file in enumerate(list_files_in_directory(model_directory)):
     #model.append(pickle.load(os.path.join(model_directory, file)))
     with open(os.path.join(model_directory,file), 'rb') as pickle_file:
@@ -84,10 +44,10 @@ for idx, file in enumerate(list_files_in_directory(model_directory)):
 # Streamlit UI
 st.title('Roath (Cardiff) House Price Predictor - by Rory Thomas')
 
-st.header("Data Set used in Training")
+"""st.header("Data Set used in Training")
 HtmlFile = open(os.path.join(img_directory,"mapped_dataset.html"), 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
-components.html(source_code, width=700, height=500, scrolling=False)
+components.html(source_code, width=700, height=500, scrolling=False)"""
     
 st.header("Data Input")
 # Input fields for the model (you can adjust these based on the features your model requires)
