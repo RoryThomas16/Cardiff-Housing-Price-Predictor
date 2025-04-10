@@ -51,10 +51,16 @@ for idx, file in enumerate(list_files_in_directory(model_directory)):
             model[name] = content
 
 # Streamlit UI
-st.title('Cardiff House Price Predictor - by Rory Thomas')
+st.title('Cardiff House Price Predictor')
 
 # Tabs for HTML visualization and input/prediction
-tab1, tab2 = st.tabs(["Prediction", "Training Data Visualization", ])
+tab1, tab2= st.tabs(["Prediction", "Training Data Visualization"])
+
+st.sidebar.title("About")
+st.sidebar.write("This app predicts house prices based on various features. Select features below to choose your house and get a predicted price.")
+st.sidebar.write("The model was trained on a dataset of house prices in Cardiff, UK. Which was scraped from Rightmove.co.uk.")
+st.sidebar.write("The app uses a variety of models to predict a price: including Ridge Regression, Random Forest, XGBoost, Stochastic Gradient Boosting, and a Support Vector Machine.")
+st.sidebar.write("The models have an approximate accuracy of >60% at worst case and >80% at best case.")
 
 # Load your dataset (replace with the actual dataset used for training)
 dataset_path = os.path.join(data_directory, plotly_dataset)  # Adjust the path as needed
@@ -76,12 +82,14 @@ with tab2:
     components.html(source_code, width=700, height=500, scrolling=False)
 
 with tab1:
-    # Input fields for the model (you can adjust these based on the features your model requires)
-    input_feature_1 = st.number_input('Year', min_value=1970, max_value=2050, value=2025)
-    input_feature_2 = st.number_input('Bedrooms', min_value=1, max_value=6, value=1)
-    input_feature_3 = st.selectbox('Property Type', ('TERRACED', 'SEMI_DETACHED', 'DETACHED', 'FLAT'))
-    input_feature_4 = st.number_input('Bathrooms', min_value=1, max_value=6, value=1)
-    input_feature_5 = st.selectbox('Region', df['region'].unique())  # New input for region
+    with st.sidebar:
+        st.header("Input Features")
+        input_feature_1 = st.number_input('Year', min_value=1970, max_value=2050, value=2025)
+        input_feature_2 = st.number_input('Bedrooms', min_value=1, max_value=6, value=1)
+        input_feature_3 = st.selectbox('Property Type', ('TERRACED', 'SEMI_DETACHED', 'DETACHED', 'FLAT'))
+        input_feature_4 = st.number_input('Bathrooms', min_value=1, max_value=6, value=1)
+        input_feature_5 = st.selectbox('Region', df['region'].unique())  
+
 
     # Collect all the input features into a numpy array
     input_data = np.array([input_feature_1, input_feature_2, input_feature_3, input_feature_4, input_feature_5])
@@ -177,4 +185,7 @@ with tab1:
             st.plotly_chart(fig, use_container_width=True)
         else:
             st.error("Dataset not found. Please ensure the dataset is available at the specified path.")
-        
+            
+st.sidebar.header("Author")
+st.sidebar.write("This app was created by Rory Thomas.")
+st.sidebar.write("https://github.com/RoryThomas16")
