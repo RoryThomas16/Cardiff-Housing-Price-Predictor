@@ -39,6 +39,8 @@ for idx, file in enumerate(list_files_in_directory(model_directory)):
         content = pickle.load(pickle_file)
         if 'propTypeEncoder' in file:
             propTypeEncoder = content
+        elif 'regionEncoder' in file:
+            regionEncoder = content
         elif 'scaler' in file:
             scaler = content
         elif 'poly' in file:
@@ -77,10 +79,11 @@ with tab1:
     input_feature_5 = st.selectbox('Region', df['region'].unique())  # New input for region
 
     # Collect all the input features into a numpy array
-    input_data = np.array([input_feature_1, input_feature_2, input_feature_3, input_feature_4])
+    input_data = np.array([input_feature_1, input_feature_2, input_feature_3, input_feature_4, input_feature_5])
 
     # Prep the input data for the model
     input_data[2] = propTypeEncoder.transform(input_data[2].reshape(-1, 1))[0]
+    input_data[4] = regionEncoder.transform(input_data[4].reshape(-1, 1))[0]
     input_data = scaler.transform(input_data.reshape(1, -1))
 
     # Button to trigger prediction
