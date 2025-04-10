@@ -8,3 +8,4 @@ torch
 seaborn
 plotly
 imblearn
+statsmodels
