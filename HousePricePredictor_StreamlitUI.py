@@ -67,11 +67,11 @@ if os.path.exists(dataset_path):
             
 with tab2:
     st.header("Data Set used in Training - Sliced by Year")
-    HtmlFile = open(os.path.join(img_directory, plotly_map), 'r', encoding='utf-8')
+    HtmlFile = open(os.path.join(img_directory, plotly_map_year), 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     components.html(source_code, width=700, height=500, scrolling=False)
     st.header("Data Set used in Training - Sliced by Region")
-    HtmlFile = open(os.path.join(img_directory, plotly_map), 'r', encoding='utf-8')
+    HtmlFile = open(os.path.join(img_directory, plotly_map_region), 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     components.html(source_code, width=700, height=500, scrolling=False)
 
