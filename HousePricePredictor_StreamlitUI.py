@@ -1,11 +1,51 @@
 # imports
-import numpy as np
+# UI Imports
 import streamlit as st 
 import streamlit.components.v1 as components
-import pickle
+
+# File imports 
 import os
+
+# Data Imports
+# - Dataframe 
+import numpy as np
 import pandas as pd
-import sklearn
+# - Visualisations
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.graph_objects as go
+import plotly.express as px
+# - Machine Learning
+# - - Classical 
+from sklearn.tree import plot_tree
+from sklearn.linear_model import LinearRegression, Ridge, Lasso, SGDRegressor
+from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.preprocessing import LabelEncoder, StandardScaler, PolynomialFeatures
+from sklearn.model_selection import train_test_split, TimeSeriesSplit, GridSearchCV
+from sklearn.ensemble import RandomForestRegressor, VotingRegressor
+from sklearn.feature_selection import SelectKBest, f_regression
+from sklearn.svm import SVR
+from xgboost import XGBRegressor
+# - - Neural Networks
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torchviz import make_dot
+
+# - Stats
+import statsmodels.api as sm
+from statsmodels.tsa.arima.model import ARIMA
+import scipy.stats as stats 
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+# - Oversampling
+from imblearn.over_sampling import SMOTE, ADASYN, RandomOverSampler
+from imblearn.pipeline import Pipeline
+        
+# Personal Import
+from Dataset_Snapshot import RightMoveScraper
+
+# Save the Model Imports
+import pickle
 
 def list_files_in_directory(directory_path):
     try:

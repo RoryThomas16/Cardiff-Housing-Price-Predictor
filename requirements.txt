@@ -3,3 +3,9 @@ pandas
 numpy
 plotly
 scikit-learn
+imblearn
+pytorch
+xgboost
+scipy
+seaborn
+matplotlib
