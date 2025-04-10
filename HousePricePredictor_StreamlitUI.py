@@ -25,11 +25,11 @@ def list_files_in_directory(directory_path):
     
 model = {}
 model_directory = os.path.join(os.getcwd(), 'models')  
-"""img_directory = os.path.join(os.getcwd(), 'img')
-print(model_directory)"""
+img_directory = os.path.join(os.getcwd(), 'img')
 for idx, file in enumerate(list_files_in_directory(model_directory)):
     #model.append(pickle.load(os.path.join(model_directory, file)))
     with open(os.path.join(model_directory,file), 'rb') as pickle_file:
+        st.write(pickle_file)
         content = pickle.load(pickle_file)
         if 'propTypeEncoder' in file:
             propTypeEncoder = content
@@ -44,10 +44,10 @@ for idx, file in enumerate(list_files_in_directory(model_directory)):
 # Streamlit UI
 st.title('Roath (Cardiff) House Price Predictor - by Rory Thomas')
 
-"""st.header("Data Set used in Training")
+st.header("Data Set used in Training")
 HtmlFile = open(os.path.join(img_directory,"mapped_dataset.html"), 'r', encoding='utf-8')
 source_code = HtmlFile.read() 
-components.html(source_code, width=700, height=500, scrolling=False)"""
+components.html(source_code, width=700, height=500, scrolling=False)
     
 st.header("Data Input")
 # Input fields for the model (you can adjust these based on the features your model requires)
