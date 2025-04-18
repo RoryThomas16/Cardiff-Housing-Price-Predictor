@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 
 # 
 plotly_map_year = "mapped_dataset_with_slider.html"
+plotly_map_cluster = "mapped_dataset_with_cluster.html"
 plotly_map_region = "mapped_dataset_by_region.html"
 plotly_dataset = "rightmove_housing_data_20250411_000928.csv"
 # 
@@ -54,7 +55,7 @@ for idx, file in enumerate(list_files_in_directory(model_directory)):
 st.title('Cardiff House Price Predictor')
 
 # Tabs for HTML visualization and input/prediction
-tab1, tab2= st.tabs(["Prediction", "Training Data Visualization"])
+tab1, tab2, tab3 = st.tabs(["Prediction", "Training Data Visualization", "Clustering Definition"])
 
 st.sidebar.title("About")
 st.sidebar.write("This app predicts house prices based on various features. Select features below to choose your house and get a predicted price.")
@@ -70,7 +71,16 @@ if os.path.exists(dataset_path):
     # Extract 'year_sold' from 'date_sold' and store it as an integer
     df['year_sold'] = pd.to_datetime(df['date_sold']).dt.year
     df['display_price'] = df['display_price'].apply(lambda x: float(x.replace('£', '').replace(',', '')) if isinstance(x, str) else x)
-            
+
+with tab3:
+    st.header("Identified Clusters")
+    HtmlFile = open(os.path.join(img_directory, plotly_map_cluster), 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    components.html(source_code, width=700, height=500, scrolling=False)
+    st.write("The clusters were identified using KMeans clustering. The clusters are defining display price by latitude and longitude.")    
+    st.write("The objective of which was to help better specify a properties' price based on its location but I don't want to overcomplicate the model with too many features.")
+    st.write("Initial testing shows no improvement anyways to predictive capabilities. So I have left this clustering out of the model but it is available here for visualisation.")  
+          
 with tab2:
     st.header("Data Set used in Training - Sliced by Year")
     HtmlFile = open(os.path.join(img_directory, plotly_map_year), 'r', encoding='utf-8')
